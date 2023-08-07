@@ -4,10 +4,7 @@ import org.eightsleep.model.Role;
 import org.eightsleep.model.User;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,14 +17,26 @@ public class UserServiceImpl implements UserService {
     );
     @Override
     public List<User> getUsersByHouseholdId(Long householdId) {
-        return users.stream()
+        List<User> usersByHouseholdId = users.stream()
                 .filter(user -> Objects.equals(user.getHouseholdId(), householdId))
-                .collect(Collectors.toList());
+                .toList();
+
+        if (usersByHouseholdId.isEmpty()) {
+            throw new EntityNotFoundException("No users found with household ID: " + householdId);
+        }
+
+        return usersByHouseholdId;
     }
     @Override
-    public Optional<User> getUserById(Long userId) {
-        return users.stream()
-                .filter(user -> Objects.equals(user.getId(), userId))
+    public User getUserById(Long userId) throws EntityNotFoundException {
+        Optional<User> user = users.stream()
+                .filter(u -> Objects.equals(u.getId(), userId))
                 .findFirst();
+
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new EntityNotFoundException("User not found with ID: " + userId);
+        }
     }
 }

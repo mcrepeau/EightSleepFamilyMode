@@ -1,11 +1,10 @@
 package org.eightsleep.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import lombok.*;
 
 import java.util.List;
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class SleepData {
     List<Interval> intervals;

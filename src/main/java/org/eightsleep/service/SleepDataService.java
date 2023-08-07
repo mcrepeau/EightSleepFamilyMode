@@ -7,5 +7,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface SleepDataService {
-    SleepData getUserSleepData(Long userId) throws IOException;
+    SleepData getUserSleepData(Long userId, String startTs, String endTs) throws IOException;
 }

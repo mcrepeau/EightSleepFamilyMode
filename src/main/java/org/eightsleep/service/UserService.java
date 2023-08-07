@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserService {
     List<User> getUsersByHouseholdId(Long householdId);
-    Optional<User> getUserById(Long userId);
+    User getUserById(Long userId) throws EntityNotFoundException;
 }

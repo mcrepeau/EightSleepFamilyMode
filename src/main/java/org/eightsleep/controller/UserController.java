@@ -1,20 +1,24 @@
 package org.eightsleep.controller;
 
 import org.eightsleep.model.User;
+import org.eightsleep.service.SleepDataServiceImpl;
 import org.eightsleep.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/v1")
-class UserController {
-
+public class UserController {
+    private static final Logger logger = Logger.getLogger(SleepDataServiceImpl.class.getName());
     @Autowired
     private UserService userService;
 
@@ -24,7 +28,8 @@ class UserController {
     }
 
     @GetMapping("/user/{userId}")
-    public Optional<User> getUserById(@PathVariable Long userId) {
+    public User getUserById(@PathVariable Long userId) {
         return userService.getUserById(userId);
     }
+
 }
