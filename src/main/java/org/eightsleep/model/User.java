@@ -4,8 +4,8 @@ import lombok.Value;
 
 @Value
 public class User {
-    int id;
-    int householdId;
+    Long id;
+    Long householdId;
     String name;
     Role role;
 }

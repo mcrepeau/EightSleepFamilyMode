@@ -1,5 +1,11 @@
 package org.eightsleep.service;
 
-public class SleepDataService {
-    // Ingest sleep data from CSV files and assign it to users?
+import org.eightsleep.model.Interval;
+import org.eightsleep.model.SleepData;
+
+import java.io.IOException;
+import java.util.List;
+
+public interface SleepDataService {
+    SleepData getUserSleepData(Long userId) throws IOException;
 }
